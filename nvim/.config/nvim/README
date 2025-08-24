@@ -1,0 +1,30 @@
+# Personal Nvim Configuration
+=============================
+this is my personal nvim config made from scratch. require nvim v0.10 >. this config is optimized for my preferred workflow, 
+more plugins may be added.
+
+# Installation
+=============================
+just clone the repo and place it in `~/.config/nvim`.
+    git clone https://fauzymadani/nvim-scratch.git ~/.config/nvim/
+    nvim
+this config is made as simple as possible for my arch (btw) setup.
+
+# Keymap
+==============================
+below is the keymap. for more details, see the `keymapp` section on the `init.lua` files.
+
+key         | description 
+-------------------------------------------
+ctrl + n    | open file explorer (nvim tree)
+
+leader + ff | telescope find files
+
+leader + fb | search buffer
+
+leader + fg | search for word
+
+leader + fh | search for help
+
+# TODO: - add harpoon.nvim
+	- config slicing
