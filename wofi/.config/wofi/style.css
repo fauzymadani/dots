@@ -1,0 +1,46 @@
+@import "/home/fauzy/.cache/wal/colors-waybar.css";
+
+* {
+  font-family: JetBrainsMono;
+  color: @foreground;
+  background: transparent;
+}
+
+#window {
+  background: alpha(@background, 0.5);
+  margin: auto;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #33ccff;
+}
+
+#input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  background: @color0;
+  color: @foreground;
+}
+
+#outer-box {
+  padding: 20px;
+}
+
+#img {
+  margin-right: 6px;
+}
+
+#entry {
+  padding: 10px;
+  border-radius: 15px;
+}
+
+#entry:selected {
+  background-color: @color1;
+  color: @background;
+}
+
+#text {
+  margin: 2px;
+}
+
