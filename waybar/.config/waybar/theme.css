@@ -1,0 +1,32 @@
+@import "/home/yzuaf/.cache/wal/colors-waybar.css";
+
+/* Base border color*/
+@define-color border-main @color7; /* foreground */
+@define-color border-alt @color7;
+
+/* Background Colors */
+@define-color bg-main @background;
+@define-color bg-alt @color2;
+@define-color bg-hover @color3;
+@define-color bg-hover-alt @color0;
+@define-color bg-tooltip @background;
+@define-color bg-second @color1;
+@define-color bg-third @color6;
+@define-color sway-bg @background;
+
+/*text color for entries, views and content in general */
+@define-color fg-main @foreground;
+@define-color fg-unactive @color8;
+@define-color content-act @color15;
+
+/* Player colors */
+@define-color ply-main @color0;
+@define-color ply-hover @color1;
+@define-color ply-act @color2;
+@define-color msc-act @color4;
+
+/* Wlogout */
+@define-color wlogout-hover rgba(37, 37, 68, 0.541);
+@define-color wlogout-bg rgba(17, 17, 17, 0.45);
+@define-color wlogout-button rgba(17, 17, 27, 0.781);
+

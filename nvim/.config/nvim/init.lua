@@ -17,11 +17,12 @@ require("lazy").setup({
   { 'uZer/pywal16.nvim', as = 'pywal16' },
   {'nvim-tree/nvim-tree.lua'},
   { 'wakatime/vim-wakatime', lazy = false },
+  {'lewis6991/gitsigns.nvim'},
 })
 
 -- Set colorscheme
--- local pywal16 = require('pywal16')
--- pywal16.setup()
+local pywal16 = require('pywal16')
+pywal16.setup()
 
 require('mini.statusline').setup()
 
