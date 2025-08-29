@@ -10,7 +10,7 @@ on-notify=exec mpv /usr/share/sounds/freedesktop/stereo/message.oga
 # Style
 font=Inter 11
 
-background-color=#1e1e2ecc 
+background-color=#1e1e2e33
 text-color=#ffffff
 border-color=#89b4fa         
 progress-color=over #89b4fa
