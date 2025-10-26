@@ -1,46 +1,58 @@
-@import "/home/yzuaf/.cache/wal/colors-waybar.css";
-
 * {
-  font-family: JetBrainsMono;
-  color: @foreground;
-  background: transparent;
+    font-family: "JetBrainsMono Nerd Font Mono", "JetBrainsMono Nerd Font Mono", "Inter", sans-serif;
+    font-size: 14px;
+    color: #333333; /* Ghostty foreground */
 }
 
-#window {
-  background: alpha(@background, 0.5);
-  margin: auto;
-  padding: 10px;
-  border-radius: 20px;
-  border: 1px solid #33ccff;
+/* Main window background */
+window {
+    background-color: rgba(204, 204, 204, 0.78); /* Ghostty background + opacity */
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid rgba(71, 71, 71, 0.35); /* subtle border, like Ghostty */
 }
 
+/* Search input field */
 #input {
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 15px;
-  background: @color0;
-  color: @foreground;
+    margin: 8px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333333;
+    background-color: rgba(255, 255, 255, 0.6); /* slightly lighter than window */
+    border: 1px solid rgba(71, 71, 71, 0.35);
+    box-shadow: none;
+    outline: none;
+    caret-color: #333333;
 }
 
-#outer-box {
-  padding: 20px;
+/* Remove blue GTK focus glow */
+#input:focus {
+    border: 1px solid rgba(71, 71, 71, 0.55);
+    background-color: rgba(255, 255, 255, 0.75);
+    box-shadow: none;
+    outline: none;
 }
 
-#img {
-  margin-right: 6px;
-}
-
+/* Each entry row */
 #entry {
-  padding: 10px;
-  border-radius: 15px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background-color: transparent;
+    color: #333333;
 }
 
+/* Selected entry */
 #entry:selected {
-  background-color: @color1;
-  color: @background;
+    background-color: rgba(71, 71, 71, 0.15); /* subtle gray highlight */
+    color: #111111;
 }
 
-#text {
-  margin: 2px;
+/* Remove arrows (sub-actions) if still visible */
+#entry image:first-child {
+    min-width: 0;
+    min-height: 0;
+    margin: 6px;
+    padding: 5px;
 }
 
