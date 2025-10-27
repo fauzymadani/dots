@@ -54,6 +54,6 @@ window#waybar { background: transparent; }
 /* mpris flat */
 #mpris { font-size: 12px; padding: 0 8px; }
 
-#custom-cpufreq, #cpu, #custom-power, #memory, #pulseaudio, #battery, #power-profiles-daemon {
+#custom-cpufreq, #cpu, #custom-power, #memory, #pulseaudio, #battery, #power-profiles-daemon, #tray {
   margin-right: 20px;   /* add spacing between each item */
 }

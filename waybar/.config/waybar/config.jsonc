@@ -5,7 +5,7 @@
   "exclusive": true,
 
   "modules-left": ["hyprland/workspaces"],
-  "modules-center": [],
+  "modules-center": ["tray"],
 
   // one “chip” that groups the three modules
   "modules-right": ["group/status"],
@@ -92,6 +92,12 @@
       "balanced": "",
       "power-saver": ""
     }
+  },
+
+  "tray": {
+  "icon-size": 18,
+  "spacing": 10,
+  "tooltip": true
   },
 
 "pulseaudio": {

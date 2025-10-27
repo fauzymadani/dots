@@ -112,7 +112,7 @@ cmp.setup({
 -- Statusline
 require("lualine").setup({
   options = {
-    theme = "catppuccin"
+    theme = "onelight"
   }
 })
 
