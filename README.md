@@ -1,4 +1,5 @@
 # Arch Dotfiles
+![Preview](preview.png "Preview")
 this repository is used to store my backup configuration files on arch linux. you have to be aware that my config may not work on your distro unless it's arch or arch based distro.
 
 # Setup
