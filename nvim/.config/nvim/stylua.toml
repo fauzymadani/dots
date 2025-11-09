@@ -1,0 +1,6 @@
+# stylua.toml
+indent_type = "Tabs"
+indent_width = 1
+quote_style = "AutoPreferSingle"
+column_width = 120
+
