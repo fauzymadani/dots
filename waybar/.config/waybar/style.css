@@ -1,59 +1,473 @@
+@import "theme.css";
+
 * {
-  font-family: "JetBrainsMono Nerd Font", "JetBrainsMono Nerd Font", "Font Awesome 6 Free Solid", "Font Awesome 6 Free";
-  font-size: 13px;
-  font-weight: 400;
-  color: #000000;
-  background: transparent;
-  min-height: 0;                /* prevent GTK from inflating height */
+  min-height: 0;
+  border: none;
+  margin: 0;
+  padding: 0;
 }
 
-window#waybar { background: transparent; }
+/* ----------------------------------------------------- MAIN BACKGROUND --- */
 
-/* Keep containers flat and tight */
-#workspaces, #group-status, #mpris, #battery, #pulseaudio, #clock {
-  margin: 0;                    /* no vertical margins */
-  padding-top: 0;
-  padding-bottom: 0;
+window#waybar>box {
+  background: @main-bg;
+  margin: 2px;
 }
 
-/* workspace strip */
-#workspaces {
+/* --------------------------------------------------------- DROP SHADOW --- */
+
+window#waybar {
+  background: @shadow;
+}
+
+/* ------------------------------------------------------------ TOOLTIPS --- */
+
+tooltip {
+  background: @main-bg;
+  border: 1.5px solid @main-br;
+  border-radius: 8px;
+}
+
+tooltip label {
+  color: @main-fg;
+  margin: -1.5px 3px;
+}
+
+/* ---------------------------------------- WORKSPACE BUTTONS and LABELS --- */
+
+#workspaces button {
+  color: @module-fg;
+  border-radius: 8px;
+  box-shadow: none;
+  margin: 2px 0;
+  padding: 0 2px;
+  transition: none;
+}
+
+#workspaces button:hover {
+  color: @hover-fg;
+  background: @hover-bg;
+  text-shadow: none;
+}
+
+#workspaces button.active {
+  color: @active-fg;
+  background: @active-bg;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
+  margin: 2px;
+  padding: 0 6px;
+}
+
+/* ------------------------------------------------------------- GENERAL --- */
+
+#custom-ws,
+#workspaces,
+#window,
+#custom-cpuinfo,
+#memory,
+#cpu,
+#idle_inhibitor,
+#clock,
+#custom-wifi,
+#tray,
+#bluetooth,
+#custom-update,
+#mpris,
+#pulseaudio,
+#backlight,
+#battery,
+#power-profiles-daemon,
+#custom-power {
+  opacity: 1;
+  color: @module-fg;
   padding: 0 4px;
 }
 
-/* workspace buttons */
-#workspaces button {
-  font-size: 12px;
-  color: #333333;
-  background: transparent;
-  border: none;
-  padding: 0 6px;               /* no vertical padding */
-  margin: 0 6px 0 0;
-  border-radius: 0;
+#custom-left1,
+#custom-left2,
+#custom-left3,
+#custom-left4,
+#custom-left5,
+#custom-left6,
+#custom-left7,
+#custom-left8 {
+  margin-bottom: 0;
+  text-shadow: -2px 0 2px rgba(0, 0, 0, 0.5);
+}
+
+#custom-right1,
+#custom-right2,
+#custom-right3,
+#custom-right4,
+#custom-right5 {
+  margin-bottom: 0;
+  padding-right: 3px;
+  text-shadow: 2px 0 2px rgba(0, 0, 0, 0.5);
+}
+
+/* ------------------------------------------------------------- MODULES --- */
+
+/* --------------------------------------------------------- window icon --- */
+
+#custom-ws {
+  background: @main-bg;
+}
+
+#custom-ws:hover {
+  color: @hover-fg;
+}
+
+/* ---------------------------------------------------------- workspaces --- */
+
+#custom-left1 {
+  color: @workspaces;
+  background: @main-bg;
+  margin-bottom: 0;
+  padding-left: 2px;
+}
+
+#workspaces {
+  background: @workspaces;
+}
+
+#custom-right1 {
+  color: @workspaces;
+  background: @main-bg;
+  text-shadow: 3px 0 2px rgba(0, 0, 0, 0.4);
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------- temperature --- */
+
+#custom-paddc {
+  padding-right: 22px;
+}
+
+#custom-left2 {
+  color: @cpuinfo;
+  background: @main-bg;
+  padding-left: 3px;
+}
+
+#custom-cpuinfo {
+  background: @cpuinfo;
+  padding: 0 0 0 1px;
+}
+
+/* -------------------------------------------------------------- memory --- */
+
+#custom-left3 {
+  color: @memory;
+  background: @cpuinfo;
+  padding-left: 3px;
+}
+
+#memory {
+  background: @memory;
+  padding: 0 0 0 1px;
+}
+
+#memory.warning {
+  color: @warning;
+}
+
+#memory.critical {
+  color: @critical;
+}
+
+/* ----------------------------------------------------------------- cpu --- */
+
+#custom-left4 {
+  color: @cpu;
+  background: @memory;
+  padding-left: 3px;
+}
+
+#cpu {
+  background: @cpu;
+}
+
+#custom-leftin1 {
+  color: @cpu;
+  margin-bottom: -1px;
+}
+
+/* --------------------------------------------------------- distro icon --- */
+
+#custom-left5 {
+  color: @distro-bg;
+  background: @main-bg;
+  text-shadow: none;
+  margin-bottom: -2px;
+  padding-left: 3px;
+}
+
+#custom-distro {
+  color: @distro-fg;
+  background: @distro-bg;
+  margin: 0 -1px -2px 0;
+  padding: 0 0 0 3px;
+  text-shadow: 0 0 1.5px rgba(0, 0, 0, 1);
+}
+
+#custom-right2 {
+  color: @distro-bg;
+  background: @main-bg;
+  text-shadow: none;
+  margin-bottom: -2px;
+}
+
+/* ---------------------------------------------------------------- time --- */
+
+#custom-rightin1 {
+  color: @time;
+  margin-bottom: -1px;
+}
+
+#idle_inhibitor {
+  background: @time;
+  padding: 0 0 0 7px;
+}
+
+#idle_inhibitor:hover {
+  color: @hover-fg;
+}
+
+#clock.time {
+  background: @time;
+  margin-left: -2px;
+  padding: 0 3px 0 0;
+}
+
+#custom-right3 {
+  color: @time;
+  background: @date;
+}
+
+/* ---------------------------------------------------------------- date --- */
+
+#clock.date {
+  background: @date;
+}
+
+#clock.date:hover {
+  color: @hover-fg;
+}
+
+#custom-right4 {
+  color: @date;
+  background: @tray;
+}
+
+/* ---------------------------------------------------------------- tray --- */
+
+#custom-wifi {
+  background: @tray;
+  padding: 0 8px 0 5px;
+}
+
+#custom-wifi:hover {
+  color: @hover-fg;
+}
+
+#tray {
+  background: @tray;
+  padding: 0 8px 0 5px;
+}
+
+#bluetooth {
+  background: @tray;
+  padding-right: 5px;
+}
+
+#bluetooth:hover {
+  color: @hover-fg;
+}
+
+#custom-update {
+  padding-right: 8px;
+  background: @tray;
+}
+
+#custom-update:hover {
+  color: @hover-fg;
+}
+
+#custom-right5 {
+  color: @tray;
+  background: @main-bg;
+}
+
+/* ---------------------------------------------------------- media info --- */
+
+#mpris {
+  background: @main-bg;
+  padding: 0 8px 0;
+}
+
+#mpris:hover {
+  color: @hover-fg;
+}
+
+/*
+    output device
+*/
+
+#custom-left6 {
+  color: @pulseaudio;
+  background: @main-bg;
+  padding-left: 3px;
+}
+
+#pulseaudio {
+  background: @pulseaudio;
+}
+
+#pulseaudio:hover {
+  color: @hover-fg;
+}
+
+/* ---------------------------------------------------------- brightness --- */
+
+#custom-left7 {
+  color: @backlight;
+  background: @pulseaudio;
+  padding-left: 2px;
+}
+
+#backlight {
+  background: @backlight;
+}
+
+/* ------------------------------------------------------------- battery --- */
+
+#custom-left8 {
+  color: @battery;
+  background: @backlight;
+  padding-left: 2px;
+}
+
+#battery {
+  color: @module-fg;
+  background: @battery;
+}
+
+#battery.warning {
+  color: @warning;
+}
+
+#battery.critical {
+  color: @critical;
+}
+
+#battery.charging {
+  color: @charging;
+}
+
+/* -------------------------------------------------------- power button --- */
+
+#custom-leftin2 {
+  color: @battery;
+  background: @main-bg;
+  margin-bottom: -1px;
+}
+
+#custom-power {
+  color: @main-bg;
+  background: @power;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  margin: 2px 4px 2px 0;
+  padding: 0 6px 0 9px;
+}
+
+#custom-power:hover {
+  color: @hover-fg;
+  background: @hover-bg;
+  text-shadow: none;
   box-shadow: none;
-  min-height: 0;                /* critical */
 }
 
-/* active workspace: underline only */
+/* ---------------------------------------------------------- FONT SIZES --- */
+
+/*
+    NOTE: Be careful when changing font sizes, as they
+    can affect alignment.
+
+    Try adjusting whole numbers first, then refine with
+    decimals.
+
+    If you increase or decrease a value, make the same
+    change to all properties in this section to keep
+    the layout consistent.
+*/
+
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 15px;
+  font-weight: bold;
+}
+
+tooltip label,
+#window label,
+#mpris {
+  font-weight: normal;
+}
+
+/* ----------------------------------------------- left and right arrows --- */
+
+#custom-left1,
+#custom-left2,
+#custom-left3,
+#custom-left4,
+#custom-left5,
+#custom-left6,
+#custom-left7,
+#custom-left8,
+#custom-right1,
+#custom-right2,
+#custom-right3,
+#custom-right4,
+#custom-right5 {
+  font-size: 14.68px;
+}
+
+/* ---------------------------------------------- left and right inverse --- */
+
+#custom-leftin1,
+#custom-leftin2,
+#custom-rightin1 {
+  font-size: 15.5px;
+}
+
+/* -------------------------------------------------------------- distro --- */
+
+#custom-distro {
+  font-size: 14.6px;
+}
+
+#custom-left5,
+#custom-right2 {
+  font-size: 15.68px;
+}
+
+/*
+    Adjust these properties as well to keep the design
+    consistent.
+*/
+
+#workspaces button {
+  border-radius: 8px;
+  padding: 0 2px;
+}
+
 #workspaces button.active {
-  background: transparent;
-  color: #333333;
-  border-bottom: 2px solid #333333;
-  padding-bottom: 0;            /* keep underline inside the 26px bar */
+  padding: 0 6px;
 }
 
-/* right group – flat */
-#group-status { background: transparent; color: #000; padding: 0 6px; }
-
-/* module spacing */
-#battery, #pulseaudio, #clock { padding: 0 4px; }
-
-/* clock a touch heavier */
-#clock { font-weight: 500; font-size: 13px; }
-
-/* mpris flat */
-#mpris { font-size: 12px; padding: 0 8px; }
-
-#custom-cpufreq, #cpu, #custom-power, #memory, #pulseaudio, #battery, #power-profiles-daemon, #tray {
-  margin-right: 20px;   /* add spacing between each item */
+#custom-power {
+  border-radius: 10px;
+  padding: 0 6px 0 9px;
 }

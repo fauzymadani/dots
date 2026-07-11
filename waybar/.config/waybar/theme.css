@@ -1,32 +1,47 @@
-@import "/home/yzuaf/.cache/wal/colors-waybar.css";
+@define-color white           #ffffff;
+@define-color black           #141414;
+@define-color gainsboro       #dcdcdc;
 
-/* Base border color*/
-@define-color border-main @color7; /* foreground */
-@define-color border-alt @color7;
+/* 
+  bg - background
+  fg - foreground
+  br - border
+*/
 
-/* Background Colors */
-@define-color bg-main @background;
-@define-color bg-alt @color2;
-@define-color bg-hover @color3;
-@define-color bg-hover-alt @color0;
-@define-color bg-tooltip @background;
-@define-color bg-second @color1;
-@define-color bg-third @color6;
-@define-color sway-bg @background;
+/* Main Colors */
 
-/*text color for entries, views and content in general */
-@define-color fg-main @foreground;
-@define-color fg-unactive @color8;
-@define-color content-act @color15;
+@define-color shadow          shade(@black, 0.5);
+@define-color main-fg         @white;
+@define-color main-bg         @black;
+@define-color main-br         @white;
 
-/* Player colors */
-@define-color ply-main @color0;
-@define-color ply-hover @color1;
-@define-color ply-act @color2;
-@define-color msc-act @color4;
+@define-color active-bg       @white;
+@define-color active-fg       @black;
 
-/* Wlogout */
-@define-color wlogout-hover rgba(37, 37, 68, 0.541);
-@define-color wlogout-bg rgba(17, 17, 17, 0.45);
-@define-color wlogout-button rgba(17, 17, 27, 0.781);
+@define-color hover-bg        @white;
+@define-color hover-fg        @gainsboro;
 
+/* Module Colors */
+
+@define-color module-fg       @white;
+@define-color workspaces      @black;
+
+@define-color cpuinfo         @black;
+@define-color memory          @black;
+@define-color cpu             @black;
+@define-color distro-fg       @white;
+@define-color distro-bg       @black;
+@define-color time            @black;
+@define-color date            @black;
+@define-color tray            @black;
+
+@define-color pulseaudio      @black;
+@define-color backlight       @black;
+@define-color battery         @black;
+@define-color power           @white;
+
+/* State Colors */
+
+@define-color warning         @white;
+@define-color critical        @white;
+@define-color charging        @white;

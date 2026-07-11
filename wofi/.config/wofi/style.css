@@ -1,15 +1,15 @@
 * {
-    font-family: "JetBrainsMono Nerd Font Mono", "JetBrainsMono Nerd Font Mono", "Inter", sans-serif;
+    font-family: "JetBrainsMono Nerd Font Mono", "Inter", sans-serif;
     font-size: 14px;
-    color: #333333; /* Ghostty foreground */
+    color: #E0E0E0; 
 }
 
 /* Main window background */
 window {
-    background-color: rgba(204, 204, 204, 0.78); /* Ghostty background + opacity */
+    background-color: rgba(0, 0, 0, 0.75); 
     border-radius: 12px;
     padding: 16px;
-    border: 1px solid rgba(71, 71, 71, 0.35); /* subtle border, like Ghostty */
+    border: 1px solid rgba(120, 120, 120, 0.25); /
 }
 
 /* Search input field */
@@ -18,37 +18,35 @@ window {
     padding: 6px 10px;
     border-radius: 8px;
     font-size: 14px;
-    color: #333333;
-    background-color: rgba(255, 255, 255, 0.6); /* slightly lighter than window */
-    border: 1px solid rgba(71, 71, 71, 0.35);
+    color: #EEEEEE;
+    background-color: rgba(20, 20, 20, 0.6); /
+    border: 1px solid rgba(130, 130, 130, 0.25);
     box-shadow: none;
     outline: none;
-    caret-color: #333333;
+    caret-color: #FFFFFF;
 }
 
-/* Remove blue GTK focus glow */
 #input:focus {
-    border: 1px solid rgba(71, 71, 71, 0.55);
-    background-color: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(160, 160, 160, 0.35);
+    background-color: rgba(30, 30, 30, 0.75);
     box-shadow: none;
     outline: none;
 }
 
-/* Each entry row */
+/* Entry row */
 #entry {
     padding: 6px 10px;
     border-radius: 6px;
     background-color: transparent;
-    color: #333333;
+    color: #D6D6D6;
 }
 
 /* Selected entry */
 #entry:selected {
-    background-color: rgba(71, 71, 71, 0.15); /* subtle gray highlight */
-    color: #111111;
+    background-color: rgba(255, 255, 255, 0.08); /
+    color: #FFFFFF;
 }
 
-/* Remove arrows (sub-actions) if still visible */
 #entry image:first-child {
     min-width: 0;
     min-height: 0;

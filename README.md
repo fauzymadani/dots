@@ -25,6 +25,8 @@ cd dots
 stow nvim # example
 ```
 
+![Nvim Preview](nvim.png "Preview nvim")
+
 # Keymaps
 several config uses the default keymap, i'm only focused on their appearance.
 

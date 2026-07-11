@@ -1,10 +1,10 @@
 # === E-Ink / Ghostty Style ===
 
 font=JetBrainsMono Nerd Font 10
-background-color=#CCCCCCC6
-text-color=#333333
-border-color=#474747
-progress-color=over #474747
+background-color=#000000CC
+text-color=#FFFFFF
+border-color=#555555
+progress-color=over #777777
 
 width=340
 height=110

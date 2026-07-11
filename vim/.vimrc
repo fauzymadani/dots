@@ -2,7 +2,7 @@ set number
 set relativenumber
 syntax on
 set nowrap 
-" set termguicolors
+set termguicolors
 
 call plug#begin()
 

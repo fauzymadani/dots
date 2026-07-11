@@ -17,20 +17,10 @@ vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename' })
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code action' })
 vim.keymap.set('n', '<leader>n', vim.diagnostic.open_float, { desc = 'Show diagnostics' })
 
-local tree_ok, api = pcall(require, 'nvim-tree.api')
-if tree_ok then
-	vim.keymap.set('n', '<leader>e', function()
-		api.tree.toggle()
-	end, { desc = 'Toggle tree' })
+vim.keymap.set('t', '<esc>', [[<C-\><C-n>]])
 
-	vim.keymap.set('n', '<leader>q', function()
-		if vim.bo.filetype == 'NvimTree' then
-			api.tree.close()
-		else
-			vim.cmd('q')
-		end
-	end, { desc = 'Close tree or buffer' })
-end
+-- tree keymaps (<leader>e) live in plugins/ui.lua nvim-tree config
+-- buffer close (<leader>q) lives in plugins/ui.lua barbar config
 
 -- harpoon keymaps
 vim.keymap.set('n', '<leader>a', function()
