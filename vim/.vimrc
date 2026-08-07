@@ -13,4 +13,4 @@ Plug 'kisom/eink.vim'
 
 call plug#end()
 
-colorscheme default
+colorscheme catppuccin_mocha

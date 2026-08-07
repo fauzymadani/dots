@@ -4,3 +4,4 @@ allow_images=false
 insensitive=true
 no_actions=true
 dmenu-parse_action=false
+allow_images=true
