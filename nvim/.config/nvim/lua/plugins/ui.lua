@@ -3,21 +3,31 @@ return {
 		'nvim-lualine/lualine.nvim',
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
 		config = function()
-			-- CosmicInk-style statusline, personalized to Catppuccin Mocha + transparency.
+			-- CosmicInk-style statusline, personalized to Rose Pine.
 			-- Based on Yeeloman's CosmicInk (MIT).
-			local colors = {
-				BG = '#1e1e2e', -- base (used as fg on colored blocks)
-				FG = '#cdd6f4', -- text
-				YELLOW = '#f9e2af',
-				CYAN = '#94e2d5', -- teal
-				DARKBLUE = '#89b4fa', -- blue (normal mode)
-				GREEN = '#a6e3a1',
-				ORANGE = '#fab387', -- peach
-				VIOLET = '#cba6f7', -- mauve
-				MAGENTA = '#f5c2e7', -- pink
-				BLUE = '#89dceb', -- sky
-				RED = '#f38ba8',
-			}
+			-- Palette derived from the active theme; refreshed on ColorScheme.
+			local colors = {}
+			local all_colors = {}
+			local function refresh_palette()
+				local P = require('config.palette').get()
+				colors.BG = P.bg
+				colors.FG = P.fg
+				colors.YELLOW = P.yellow
+				colors.CYAN = P.cyan
+				colors.DARKBLUE = P.violet -- normal-mode accent
+				colors.GREEN = P.green
+				colors.ORANGE = P.orange
+				colors.VIOLET = P.violet
+				colors.MAGENTA = P.magenta
+				colors.BLUE = P.blue
+				colors.RED = P.red
+				all_colors = {
+					colors.RED, colors.BLUE, colors.GREEN, colors.MAGENTA,
+					colors.ORANGE, colors.CYAN, colors.VIOLET, colors.YELLOW, colors.DARKBLUE,
+				}
+			end
+			refresh_palette()
+			vim.api.nvim_create_autocmd('ColorScheme', { callback = refresh_palette })
 
 			local function get_mode_color()
 				local mode_color = {
@@ -60,17 +70,6 @@ return {
 				return opposite_colors[mode_color] or colors.FG
 			end
 
-			local all_colors = {
-				colors.RED,
-				colors.BLUE,
-				colors.GREEN,
-				colors.MAGENTA,
-				colors.ORANGE,
-				colors.CYAN,
-				colors.VIOLET,
-				colors.YELLOW,
-				colors.DARKBLUE,
-			}
 			local function get_animated_color(mode_color)
 				local possible = {}
 				for _, color in ipairs(all_colors) do
@@ -213,6 +212,8 @@ return {
 					component_separators = '',
 					section_separators = '',
 					globalstatus = true,
+					-- bg = 'NONE' inherits the window Normal bg, so the bar always matches
+					-- the editor (and follows any theme) without baking a hex at setup time.
 					theme = {
 						normal = { c = { fg = colors.FG, bg = 'NONE' } },
 						inactive = { c = { fg = colors.FG, bg = 'NONE' } },
@@ -457,36 +458,28 @@ return {
 				},
 			})
 
-			-- Catppuccin Mocha accents + transparent bg; re-apply on ColorScheme
-			local m = {
-				mauve = '#cba6f7',
-				blue = '#89b4fa',
-				green = '#a6e3a1',
-				peach = '#fab387',
-				red = '#f38ba8',
-				overlay = '#6c7086',
-				text = '#cdd6f4',
-				teal = '#94e2d5',
-				yellow = '#f9e2af',
-			}
+			-- Theme-driven accents; re-derived on each ColorScheme
 			local function tree_hl()
+				local m = require('config.palette').get()
 				local set = function(g, s)
 					vim.api.nvim_set_hl(0, g, s)
 				end
-				set('NvimTreeNormal', { bg = 'NONE', fg = m.text })
-				set('NvimTreeEndOfBuffer', { bg = 'NONE' })
-				set('NvimTreeWinSeparator', { bg = 'NONE', fg = m.overlay })
-				set('NvimTreeRootFolder', { fg = m.mauve, bold = true })
-				set('NvimTreeFolderIcon', { fg = m.mauve })
+				-- Transparency toggle: set tbg to 'NONE' to make the tree transparent.
+				local tbg = m.bg
+				set('NvimTreeNormal', { bg = tbg, fg = m.fg })
+				set('NvimTreeEndOfBuffer', { bg = tbg })
+				set('NvimTreeWinSeparator', { bg = tbg, fg = m.muted })
+				set('NvimTreeRootFolder', { fg = m.violet, bold = true })
+				set('NvimTreeFolderIcon', { fg = m.violet })
 				set('NvimTreeFolderName', { fg = m.blue })
 				set('NvimTreeOpenedFolderName', { fg = m.blue, bold = true })
-				set('NvimTreeIndentMarker', { fg = m.overlay })
+				set('NvimTreeIndentMarker', { fg = m.muted })
 				set('NvimTreeGitDirty', { fg = m.yellow })
 				set('NvimTreeGitNew', { fg = m.green })
 				set('NvimTreeGitDeleted', { fg = m.red })
-				set('NvimTreeGitStaged', { fg = m.teal })
-				set('NvimTreeSpecialFile', { fg = m.peach, underline = true })
-				set('NvimTreeCursorLine', { bg = '#313244' })
+				set('NvimTreeGitStaged', { fg = m.cyan })
+				set('NvimTreeSpecialFile', { fg = m.orange, underline = true })
+				set('NvimTreeCursorLine', { bg = m.bg_raised })
 			end
 			tree_hl()
 			vim.api.nvim_create_autocmd('ColorScheme', { callback = tree_hl })
@@ -634,35 +627,32 @@ return {
 		config = function(_, opts)
 			require('barbar').setup(opts)
 
-			-- Catppuccin Mocha restyle: mauve-accented active tab, transparent dimmed rest
-			local mocha = {
-				mauve = '#cba6f7',
-				peach = '#fab387',
-				text = '#cdd6f4',
-				subtext = '#a6adc8',
-				overlay = '#6c7086',
-				surface = '#313244',
-			}
+			-- Theme-driven restyle: accent active tab, muted dimmed rest.
 			local hl = function(group, spec)
 				vim.api.nvim_set_hl(0, group, spec)
 			end
 
-			-- ponytail: re-apply on ColorScheme; base16/transparent clobber Buffer* groups after setup
+			-- Re-derive from the active theme on each ColorScheme (base16/transparent
+			-- clobber Buffer* groups after setup, so this must re-run anyway).
 			local function apply_hl()
-				hl('BufferTabpageFill', { bg = 'NONE' })
-				-- Active buffer: transparent, mauve accent + bold to stand out
-				hl('BufferCurrent', { fg = mocha.text, bg = 'NONE', bold = true })
-				hl('BufferCurrentSign', { fg = mocha.mauve, bg = 'NONE' })
-				hl('BufferCurrentMod', { fg = mocha.peach, bg = 'NONE', bold = true })
-				hl('BufferCurrentIndex', { fg = mocha.mauve, bg = 'NONE' })
-				-- Visible (open in another window): mid emphasis, transparent
-				hl('BufferVisible', { fg = mocha.subtext, bg = 'NONE' })
-				hl('BufferVisibleSign', { fg = mocha.overlay, bg = 'NONE' })
-				hl('BufferVisibleMod', { fg = mocha.peach, bg = 'NONE' })
-				-- Inactive: dimmed, transparent
-				hl('BufferInactive', { fg = mocha.overlay, bg = 'NONE' })
-				hl('BufferInactiveSign', { fg = mocha.overlay, bg = 'NONE' })
-				hl('BufferInactiveMod', { fg = mocha.peach, bg = 'NONE' })
+				local P = require('config.palette').get()
+				-- Transparency toggle: set bg/raised to 'NONE' to make barbar transparent.
+				local bg = P.bg
+				local raised = P.bg_raised
+				hl('BufferTabpageFill', { bg = bg })
+				-- Active buffer: raised bg, accent + bold to stand out
+				hl('BufferCurrent', { fg = P.fg, bg = raised, bold = true })
+				hl('BufferCurrentSign', { fg = P.violet, bg = raised })
+				hl('BufferCurrentMod', { fg = P.orange, bg = raised, bold = true })
+				hl('BufferCurrentIndex', { fg = P.violet, bg = raised })
+				-- Visible (open in another window): mid emphasis
+				hl('BufferVisible', { fg = P.subtle, bg = bg })
+				hl('BufferVisibleSign', { fg = P.muted, bg = bg })
+				hl('BufferVisibleMod', { fg = P.orange, bg = bg })
+				-- Inactive: dimmed
+				hl('BufferInactive', { fg = P.muted, bg = bg })
+				hl('BufferInactiveSign', { fg = P.muted, bg = bg })
+				hl('BufferInactiveMod', { fg = P.orange, bg = bg })
 			end
 			apply_hl()
 			vim.api.nvim_create_autocmd('ColorScheme', { callback = apply_hl })
@@ -700,12 +690,7 @@ return {
 				persist_size = true,
 				persist_mode = true,
 				direction = 'float',
-				shade_terminals = false, -- shading paints an opaque overlay; kills transparency
-				highlights = {
-					Normal = { guibg = 'NONE' },
-					NormalFloat = { guibg = 'NONE' },
-					FloatBorder = { guifg = '#cba6f7', guibg = 'NONE' },
-				},
+				shade_terminals = false, -- follows theme Normal/FloatBorder (dynamic)
 				float_opts = {
 					border = 'curved',
 					winblend = 0,

@@ -9,8 +9,9 @@ call plug#begin()
 " List your plugins here
 Plug 'tpope/vim-sensible'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
-Plug 'kisom/eink.vim'
+Plug 'kisom/eink.vim',
+Plug 'rose-pine/vim'
 
 call plug#end()
 
-colorscheme catppuccin_mocha
+colorscheme rosepine

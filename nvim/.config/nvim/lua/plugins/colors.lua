@@ -1,5 +1,6 @@
 return {
 	{ 'RRethy/base16-nvim' },
+	{ 'rose-pine/neovim', name = 'rose-pine', priority = 1000 },
 	{ 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
 	{
 		'uZer/pywal16.nvim',
@@ -11,6 +12,9 @@ return {
 			require('e-ink').setup()
 		end,
 	},
+	-- Transparency disabled (terminal is opaque). Uncomment this whole block +
+	-- flip the `local bg`/`local raised` toggles in ui.lua to re-enable.
+	--[[
 	{
 		'xiyaowong/transparent.nvim',
 		config = function()
@@ -39,4 +43,5 @@ return {
 			})
 		end,
 	},
+	]]
 }
