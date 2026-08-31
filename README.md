@@ -54,3 +54,4 @@ several config uses the default keymap, i'm only focused on their appearance.
 ## TODO
 - improve docs
 - add more config
+

@@ -11,7 +11,8 @@ Plug 'tpope/vim-sensible'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'kisom/eink.vim',
 Plug 'rose-pine/vim'
+Plug 'andreasvc/vim-256noir'
 
 call plug#end()
 
-colorscheme rosepine
+colorscheme 256_noir
