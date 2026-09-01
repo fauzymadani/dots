@@ -10,6 +10,12 @@ vim.keymap.set('n', '<leader>n', vim.diagnostic.open_float, { desc = 'Show diagn
 
 vim.keymap.set('t', '<esc>', [[<C-\><C-n>]])
 
+-- Resize the current split without repeating <C-w>.
+vim.keymap.set('n', '<A-k>', '<Cmd>resize +2<CR>', { desc = 'Increase split height' })
+vim.keymap.set('n', '<A-j>', '<Cmd>resize -2<CR>', { desc = 'Decrease split height' })
+vim.keymap.set('n', '<A-h>', '<Cmd>vertical resize -3<CR>', { desc = 'Decrease split width' })
+vim.keymap.set('n', '<A-l>', '<Cmd>vertical resize +3<CR>', { desc = 'Increase split width' })
+
 -- tree keymaps (<leader>e) live in plugins/ui.lua nvim-tree config
 -- buffer close (<leader>q) lives in plugins/ui.lua barbar config
 

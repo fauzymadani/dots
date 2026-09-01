@@ -35,10 +35,12 @@ return {
 			-- go
 			vim.lsp.config.gopls = {
 				cmd = { 'gopls' },
+				filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
 				settings = {
 					gopls = {
 						analyses = { unusedparams = true },
 						staticcheck = true,
+						gofumpt = true,
 					},
 				},
 			}
@@ -70,6 +72,7 @@ return {
 		event = 'VeryLazy',
 		opts = {
 			hint_enable = false,
+			toggle_key = '<M-s>',
 			handler_opts = {
 				border = 'rounded',
 			},
@@ -84,6 +87,7 @@ return {
 		opts = {
 			formatters_by_ft = {
 				lua = { 'stylua' },
+				go = { 'gofmt' },
 			},
 			format_on_save = {
 				timeout_ms = 1000,

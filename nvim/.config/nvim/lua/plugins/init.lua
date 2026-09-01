@@ -7,4 +7,5 @@ return {
 	{ import = 'plugins.autopairs' },
 	{ import = 'plugins.diffview' },
 	{ import = 'plugins.indent' },
+	{ import = 'plugins.compile' },
 }
