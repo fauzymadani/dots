@@ -2,6 +2,7 @@ return {
 	{ 'oskarnurm/koda.nvim' },
 	{ 'harshrajsachan/omni.nvim' },
 	{ 'nickkadutskyi/jb.nvim' },
+	{ 'wtfox/luna.nvim' },
 	{ 'miikanissi/modus-themes.nvim' },
 	{ 'rose-pine/neovim', name = 'rose-pine', priority = 1000 },
 	{ 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },

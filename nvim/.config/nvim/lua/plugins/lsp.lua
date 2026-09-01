@@ -91,7 +91,7 @@ return {
 			},
 			formatters = {
 				stylua = {
-					prepend_args = { '--config-path', vim.fn.expand('~/dotfiles/nvim/.config/nvim/stylua.toml') },
+					prepend_args = { '--config-path', vim.fn.stdpath('config') .. '/stylua.toml' },
 				},
 			},
 		},

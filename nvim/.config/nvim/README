@@ -1,6 +1,6 @@
 # Personal Nvim Configuration
 =============================
-this is my personal nvim config made from scratch. require nvim v0.10 >. this config is optimized for my preferred workflow, 
+this is my personal nvim config made from scratch. require nvim v0.11 >. this config is optimized for my preferred workflow,
 more plugins may be added.
 
 # Installation

@@ -1,1 +1,1 @@
-vim.cmd.colorscheme('blackout')
+vim.cmd.colorscheme('luna')
