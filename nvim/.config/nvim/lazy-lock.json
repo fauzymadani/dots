@@ -19,6 +19,7 @@
   "jb.nvim": { "branch": "main", "commit": "5cd71126f6a3ccea7bef8a22ba4b17eff23a5d6f" },
   "koda.nvim": { "branch": "main", "commit": "25a5c98ca2f6bb0b69f5e2654a78f0d7c7e0721d" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
+  "lazygit.nvim": { "branch": "main", "commit": "a04ad0dbc725134edbee3a5eea29290976695357" },
   "lsp_signature.nvim": { "branch": "master", "commit": "b7ace9ddb1640ce266012a45a672dfdaedfa5ec6" },
   "luna.nvim": { "branch": "main", "commit": "727c19334528e1b8939f518d1ea43c4e62d98f91" },
   "markdown-plus.nvim": { "branch": "main", "commit": "52f6af120a6409a5b8860cb0db01e835483d00d6" },
