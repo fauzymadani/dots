@@ -82,7 +82,7 @@
         "format-charging": "󰂄 {capacity}%",
         "format-plugged": " {capacity}%",
         "format-alt": "{icon} {time}",
-        "format-icons": ["󰂎", "󰁺", "维护", "󰁽", "󰁹"]
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
     "power-profiles-daemon": {
         "format": "{icon}",
@@ -91,7 +91,7 @@
         "format-icons": {
             "default": "",
             "performance": "",
-            "balanced": "",
+            "balanced": "",
             "power-saver": "󰌪"
         }
     },

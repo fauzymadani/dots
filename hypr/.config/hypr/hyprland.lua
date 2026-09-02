@@ -30,6 +30,7 @@ local terminal = 'ghostty'
 local fileManager = 'dolphin'
 local menu = 'wofi --show drun'
 local settings = 'better-control'
+local lock = 'hyprlock'
 
 -------------------
 ---- AUTOSTART ----
@@ -275,7 +276,8 @@ hl.bind(mainMod .. ' + V', hl.dsp.window.float({ action = 'toggle' }))
 hl.bind(mainMod .. ' + R', hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. ' + P', hl.dsp.window.pseudo())
 hl.bind(mainMod .. ' + J', hl.dsp.layout('togglesplit')) -- dwindle only
-hl.bind(mainMod .. ' + L', hl.dsp.exec_cmd(settings))
+hl.bind(mainMod .. ' + L', hl.dsp.exec_cmd(lock))
+hl.bind(mainMod .. ' + B', hl.dsp.exec_cmd(settings))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. ' + left', hl.dsp.focus({ direction = 'left' }))
