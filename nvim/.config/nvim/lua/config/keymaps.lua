@@ -19,5 +19,8 @@ vim.keymap.set('n', '<A-l>', '<Cmd>vertical resize +3<CR>', { desc = 'Increase s
 -- tree keymaps (<leader>e) live in plugins/ui.lua nvim-tree config
 -- buffer close (<leader>q) lives in plugins/ui.lua barbar config
 
+-- Toggle transparency
+vim.keymap.set('n', '<leader>ze', '<Cmd>TransparentToggle<CR>', { desc = 'Toggle transparency' })
+
 -- Select all text in the file
 vim.keymap.set('n', '<leader>sa', 'ggVG', { desc = 'Select all text' })

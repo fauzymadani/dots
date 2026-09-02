@@ -3,6 +3,7 @@ return {
 	{ 'harshrajsachan/omni.nvim' },
 	{ 'nickkadutskyi/jb.nvim' },
 	{ 'wtfox/luna.nvim' },
+	{ 'shaunsingh/nord.nvim' },
 	{ 'miikanissi/modus-themes.nvim' },
 	{ 'rose-pine/neovim', name = 'rose-pine', priority = 1000 },
 	{ 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
@@ -16,14 +17,34 @@ return {
 			require('e-ink').setup()
 		end,
 	},
-	-- Transparency disabled (terminal is opaque). Uncomment this whole block +
-	-- flip the `local bg`/`local raised` toggles in ui.lua to re-enable.
-	--[[
 	{
 		'xiyaowong/transparent.nvim',
 		config = function()
 			require('transparent').setup({
 				extra_groups = {
+					'StatusLine',
+					'StatusLineNC',
+					-- Floating windows (docs, signature, diagnostics)
+					'NormalFloat',
+					'FloatBorder',
+					'FloatTitle',
+					-- Diagnostic floating window
+					'DiagnosticFloating',
+					'DiagnosticFloatingError',
+					'DiagnosticFloatingWarn',
+					'DiagnosticFloatingInfo',
+					'DiagnosticFloatingHint',
+					-- Diagnostic base groups
+					'DiagnosticError',
+					'DiagnosticWarn',
+					'DiagnosticInfo',
+					'DiagnosticHint',
+					'LspSignatureActiveParameter',
+					-- File tree
+					'NvimTreeNormal',
+					'NvimTreeEndOfBuffer',
+					'NvimTreeWinSeparator',
+					-- Telescope
 					'TelescopeNormal',
 					'TelescopeBorder',
 					'TelescopePromptNormal',
@@ -32,20 +53,31 @@ return {
 					'TelescopeResultsBorder',
 					'TelescopePreviewNormal',
 					'TelescopePreviewBorder',
+					-- Which-key
 					'WhichKey',
 					'WhichKeyNormal',
 					'WhichKeyBorder',
 					'WhichKeyFloat',
+					-- Diffview
 					'DiffviewNormal',
 					'DiffviewFilePanelTitle',
 					'DiffviewFilePanelCounter',
 					'DiffviewFilePanelFileName',
-					'NormalFloat',
-					'FloatBorder',
-					'FloatTitle',
 				},
 			})
+			-- Force statusline to remain opaque with palette colors
+			vim.api.nvim_create_autocmd('User', {
+				pattern = 'TransparentEnable,TransparentDisable',
+				callback = function()
+					local P = require('config.palette').get()
+					vim.api.nvim_set_hl(0, 'StatusLine', { fg = P.fg, bg = P.bg, bold = true })
+					vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = P.muted, bg = P.bg })
+				end,
+			})
+			-- Set statusline colors on startup
+			local P = require('config.palette').get()
+			vim.api.nvim_set_hl(0, 'StatusLine', { fg = P.fg, bg = P.bg, bold = true })
+			vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = P.muted, bg = P.bg })
 		end,
 	},
-	]]
 }

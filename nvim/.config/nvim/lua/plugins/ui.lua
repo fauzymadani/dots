@@ -47,8 +47,11 @@ return {
 				local set = function(g, s)
 					vim.api.nvim_set_hl(0, g, s)
 				end
-				-- Transparency toggle: set tbg to 'NONE' to make the tree transparent.
-				local tbg = m.bg
+				-- Detect if transparency is enabled (check if transparent.nvim is loaded and active)
+				local is_transparent = vim.fn.exists(':TransparentToggle') == 2
+				local tbg = is_transparent and 'NONE' or m.bg
+				local raised_bg = is_transparent and 'NONE' or m.bg_raised
+
 				set('NvimTreeNormal', { bg = tbg, fg = m.fg })
 				set('NvimTreeEndOfBuffer', { bg = tbg })
 				set('NvimTreeWinSeparator', { bg = tbg, fg = m.muted })
@@ -62,10 +65,16 @@ return {
 				set('NvimTreeGitDeleted', { fg = m.red })
 				set('NvimTreeGitStaged', { fg = m.cyan })
 				set('NvimTreeSpecialFile', { fg = m.orange, underline = true })
-				set('NvimTreeCursorLine', { bg = m.bg_raised })
+				set('NvimTreeCursorLine', { bg = raised_bg })
 			end
 			tree_hl()
+			-- Re-run on ColorScheme and when transparent is toggled
 			vim.api.nvim_create_autocmd('ColorScheme', { callback = tree_hl })
+			-- Hook into transparent.nvim's toggle to update tree highlights
+			vim.api.nvim_create_autocmd('User', {
+				pattern = 'TransparentEnable,TransparentDisable',
+				callback = tree_hl,
+			})
 
 			local api = require('nvim-tree.api')
 			vim.keymap.set('n', '<leader>e', function()
@@ -258,6 +267,7 @@ return {
 			map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', key_opts)
 			map('n', '<A->>', '<Cmd>BufferMoveNext<CR>', key_opts)
 			-- pin / pick-close
+			map('n', '<leader>bj', '<Cmd>BufferPick<CR>', key_opts)
 			map('n', '<leader>bp', '<Cmd>BufferPin<CR>', key_opts)
 			map('n', '<leader>bc', '<Cmd>BufferPickDelete<CR>', key_opts)
 		end,
