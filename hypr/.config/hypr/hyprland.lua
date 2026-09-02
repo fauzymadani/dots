@@ -331,17 +331,19 @@ hl.bind('XF86AudioPause', hl.dsp.exec_cmd('playerctl play-pause'), { locked = tr
 hl.bind('XF86AudioPlay', hl.dsp.exec_cmd('playerctl play-pause'), { locked = true })
 hl.bind('XF86AudioPrev', hl.dsp.exec_cmd('playerctl previous'), { locked = true })
 
+-- Full screenshot (PRINT)
 hl.bind(
 	'PRINT',
 	hl.dsp.exec_cmd(
-		[[sh -c 'dir="$HOME/Pictures/hyprland" && mkdir -p "$dir" && file="$dir/Screenshot_$(date +%Y%m%d_%H%M%S).png" && grim "$file" && wl-copy --type image/png < "$file" && notify-send -i "$file" "Screenshot" "is saved"']]
+		[[sh -c 'dir="$HOME/Pictures/Screenshoot/hyprland" && mkdir -p "$dir" && file="$dir/Screenshot_$(date +%Y%m%d_%H%M%S).png" && grim "$file" && wl-copy --type image/png < "$file" && notify-send -i "$file" "Screenshot" "saved to $dir"']]
 	)
 )
 
+-- Area screenshot (ALT + PRINT)
 hl.bind(
 	'ALT + PRINT',
 	hl.dsp.exec_cmd(
-		[[sh -c 'dir="$HOME/Pictures/hyprland" && mkdir -p "$dir" && file="$dir/Screenshot_$(date +%Y%m%d_%H%M%S).png" && grim -g "$(slurp)" "$file" && wl-copy --type image/png < "$file" && notify-send -i "$file" "Screenshot" "Copied to clipboard"']]
+		[[sh -c 'dir="$HOME/Pictures/Screenshoot/hyprland" && mkdir -p "$dir" && file="$dir/Screenshot_$(date +%Y%m%d_%H%M%S).png" && grim -g "$(slurp)" "$file" && wl-copy --type image/png < "$file" && notify-send -i "$file" "Screenshot" "Copied to clipboard and saved to $dir"']]
 	)
 )
 
