@@ -27,7 +27,7 @@ hl.monitor({
 
 -- Set programs that you use
 local terminal = 'ghostty'
-local fileManager = 'dolphin'
+local fileManager = 'pcmanfm-qt'
 local menu = 'wofi --show drun'
 local settings = 'better-control'
 local lock = 'hyprlock'
@@ -132,8 +132,8 @@ hl.config({
 
 		blur = {
 			enabled = true,
-			size = 3,
-			passes = 1,
+			size = 5,
+			passes = 2,
 			vibrancy = 0.1696,
 		},
 	},
@@ -404,6 +404,18 @@ hl.window_rule({
 hl.window_rule({
 	name = 'better_control',
 	match = { class = 'better_control.py' },
+	float = true,
+})
+
+hl.window_rule({
+	name = 'blueman-manager-float',
+	match = { class = 'blueman-manager' },
+	float = true,
+})
+
+hl.window_rule({
+	name = 'pcmanfm-qt',
+	match = { class = 'pcmanfm-qt' },
 	float = true,
 })
 
