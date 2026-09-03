@@ -11,16 +11,16 @@ vim.opt.laststatus = 2 -- selalu tampilkan statusline (2 = selalu, 3 = global sa
 
 vim.opt.statusline = table.concat({
 	'%f',
-	' %m',
+	'%m',
+	'  ',
 	'%=',
 	'%{&fileformat}',
 	'  ',
 	'%{(&fenc == "" ? &enc : &fenc)}',
-	'   ',
+	'  ',
 	'%l:%c',
-	'   ',
-	' %p%%',
-	'   ',
+	'  ',
+	'%p%%',
 }, '')
 
 -- Reload buffers when files change on disk (e.g. edited by Claude in another tab)

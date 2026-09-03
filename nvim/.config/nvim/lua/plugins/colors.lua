@@ -21,9 +21,8 @@ return {
 		'xiyaowong/transparent.nvim',
 		config = function()
 			require('transparent').setup({
+				exclude_groups = { 'StatusLine', 'StatusLineNC' },
 				extra_groups = {
-					'StatusLine',
-					'StatusLineNC',
 					-- Floating windows (docs, signature, diagnostics)
 					'NormalFloat',
 					'FloatBorder',
@@ -65,19 +64,6 @@ return {
 					'DiffviewFilePanelFileName',
 				},
 			})
-			-- Force statusline to remain opaque with palette colors
-			vim.api.nvim_create_autocmd('User', {
-				pattern = 'TransparentEnable,TransparentDisable',
-				callback = function()
-					local P = require('config.palette').get()
-					vim.api.nvim_set_hl(0, 'StatusLine', { fg = P.fg, bg = P.bg, bold = true })
-					vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = P.muted, bg = P.bg })
-				end,
-			})
-			-- Set statusline colors on startup
-			local P = require('config.palette').get()
-			vim.api.nvim_set_hl(0, 'StatusLine', { fg = P.fg, bg = P.bg, bold = true })
-			vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = P.muted, bg = P.bg })
 		end,
 	},
 }
