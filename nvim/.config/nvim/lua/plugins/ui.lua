@@ -44,28 +44,35 @@ return {
 			-- Theme-driven accents; re-derived on each ColorScheme
 			local function tree_hl()
 				local m = require('config.palette').get()
-				local set = function(g, s)
-					vim.api.nvim_set_hl(0, g, s)
+				local is_transparent = vim.g.transparent_enabled ~= false
+				
+				local function set_hl(g, fg, bg, extra)
+					local spec = { fg = fg }
+					if not is_transparent and bg then
+						spec.bg = bg
+					end
+					if extra then
+						for k, v in pairs(extra) do
+							spec[k] = v
+						end
+					end
+					vim.api.nvim_set_hl(0, g, spec)
 				end
-				-- Detect if transparency is enabled (check if transparent.nvim is loaded and active)
-				local is_transparent = vim.fn.exists(':TransparentToggle') == 2
-				local tbg = is_transparent and 'NONE' or m.bg
-				local raised_bg = is_transparent and 'NONE' or m.bg_raised
 
-				set('NvimTreeNormal', { bg = tbg, fg = m.fg })
-				set('NvimTreeEndOfBuffer', { bg = tbg })
-				set('NvimTreeWinSeparator', { bg = tbg, fg = m.muted })
-				set('NvimTreeRootFolder', { fg = m.violet, bold = true })
-				set('NvimTreeFolderIcon', { fg = m.violet })
-				set('NvimTreeFolderName', { fg = m.blue })
-				set('NvimTreeOpenedFolderName', { fg = m.blue, bold = true })
-				set('NvimTreeIndentMarker', { fg = m.muted })
-				set('NvimTreeGitDirty', { fg = m.yellow })
-				set('NvimTreeGitNew', { fg = m.green })
-				set('NvimTreeGitDeleted', { fg = m.red })
-				set('NvimTreeGitStaged', { fg = m.cyan })
-				set('NvimTreeSpecialFile', { fg = m.orange, underline = true })
-				set('NvimTreeCursorLine', { bg = raised_bg })
+				set_hl('NvimTreeNormal', m.fg, m.bg)
+				set_hl('NvimTreeEndOfBuffer', nil, m.bg)
+				set_hl('NvimTreeWinSeparator', m.muted, m.bg)
+				set_hl('NvimTreeRootFolder', m.violet, nil, { bold = true })
+				set_hl('NvimTreeFolderIcon', m.violet, nil)
+				set_hl('NvimTreeFolderName', m.blue, nil)
+				set_hl('NvimTreeOpenedFolderName', m.blue, nil, { bold = true })
+				set_hl('NvimTreeIndentMarker', m.muted, nil)
+				set_hl('NvimTreeGitDirty', m.yellow, nil)
+				set_hl('NvimTreeGitNew', m.green, nil)
+				set_hl('NvimTreeGitDeleted', m.red, nil)
+				set_hl('NvimTreeGitStaged', m.cyan, nil)
+				set_hl('NvimTreeSpecialFile', m.orange, nil, { underline = true })
+				set_hl('NvimTreeCursorLine', nil, m.bg_raised)
 			end
 			tree_hl()
 			-- Re-run on ColorScheme and when transparent is toggled
@@ -228,27 +235,29 @@ return {
 			-- clobber Buffer* groups after setup, so this must re-run anyway).
 			local function apply_hl()
 				local P = require('config.palette').get()
-				-- Transparency toggle: set bg/raised to 'NONE' to make barbar transparent.
-				local bg = P.bg
-				local raised = P.bg_raised
-				hl('BufferTabpageFill', { bg = bg })
-				-- Active buffer: raised bg, accent + bold to stand out
-				hl('BufferCurrent', { fg = P.fg, bg = raised, bold = true })
-				hl('BufferCurrentSign', { fg = P.violet, bg = raised })
-				hl('BufferCurrentMod', { fg = P.orange, bg = raised, bold = true })
-				hl('BufferCurrentIndex', { fg = P.violet, bg = raised })
-				-- Visible (open in another window): mid emphasis
-				hl('BufferVisible', { fg = P.subtle, bg = bg })
-				hl('BufferVisibleSign', { fg = P.muted, bg = bg })
-				hl('BufferVisibleMod', { fg = P.orange, bg = bg })
-				-- Inactive: dimmed
-				hl('BufferInactive', { fg = P.muted, bg = bg })
-				hl('BufferInactiveSign', { fg = P.muted, bg = bg })
-				hl('BufferInactiveMod', { fg = P.orange, bg = bg })
-				-- Git status
-				hl('BufferCurrentAddedSign', { fg = P.green, bg = raised })
-				hl('BufferCurrentChangedSign', { fg = P.yellow, bg = raised })
-				hl('BufferCurrentDeletedSign', { fg = P.red, bg = raised })
+				
+				local function get_hl(fg, bg, bold)
+					local spec = { fg = fg, bg = bg }
+					if bold then
+						spec.bold = true
+					end
+					return spec
+				end
+
+				hl('BufferTabpageFill', get_hl(nil, P.bg))
+				hl('BufferCurrent', get_hl(P.fg, P.bg_raised, true))
+				hl('BufferCurrentSign', get_hl(P.violet, P.bg_raised))
+				hl('BufferCurrentMod', get_hl(P.orange, P.bg_raised, true))
+				hl('BufferCurrentIndex', get_hl(P.violet, P.bg_raised))
+				hl('BufferVisible', get_hl(P.subtle, P.bg))
+				hl('BufferVisibleSign', get_hl(P.muted, P.bg))
+				hl('BufferVisibleMod', get_hl(P.orange, P.bg))
+				hl('BufferInactive', get_hl(P.muted, P.bg))
+				hl('BufferInactiveSign', get_hl(P.muted, P.bg))
+				hl('BufferInactiveMod', get_hl(P.orange, P.bg))
+				hl('BufferCurrentAddedSign', get_hl(P.green, P.bg_raised))
+				hl('BufferCurrentChangedSign', get_hl(P.yellow, P.bg_raised))
+				hl('BufferCurrentDeletedSign', get_hl(P.red, P.bg_raised))
 			end
 			apply_hl()
 			vim.api.nvim_create_autocmd('ColorScheme', { callback = apply_hl })

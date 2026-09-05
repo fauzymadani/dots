@@ -21,7 +21,7 @@ return {
 		'xiyaowong/transparent.nvim',
 		config = function()
 			require('transparent').setup({
-				exclude_groups = { 'StatusLine', 'StatusLineNC' },
+				-- exclude_groups = { 'StatusLine', 'StatusLineNC' },
 				extra_groups = {
 					-- Floating windows (docs, signature, diagnostics)
 					'NormalFloat',
@@ -43,7 +43,7 @@ return {
 					'NvimTreeNormal',
 					'NvimTreeEndOfBuffer',
 					'NvimTreeWinSeparator',
-					-- Telescope
+										-- Telescope
 					'TelescopeNormal',
 					'TelescopeBorder',
 					'TelescopePromptNormal',
@@ -62,6 +62,13 @@ return {
 					'DiffviewFilePanelTitle',
 					'DiffviewFilePanelCounter',
 					'DiffviewFilePanelFileName',
+					-- Markdown and Code blocks in Hover
+					'markdownCode',
+					'markdownCodeBlock',
+					'@markup.raw',
+					'@markup.raw.block',
+					'@markup.raw.block.markdown',
+					'@markup.raw.markdown_inline',
 				},
 			})
 		end,

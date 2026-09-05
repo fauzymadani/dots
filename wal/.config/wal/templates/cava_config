@@ -1,0 +1,27 @@
+[general]
+framerate = 60
+autosens = 1
+sensitivity = 100
+sleep_timer = 0
+
+[input]
+method = pulse
+source = auto
+
+[output]
+method = ncurses
+channels = stereo
+
+[color]
+gradient = 1
+gradient_count = 6
+gradient_color_1 = '{color1}'
+gradient_color_2 = '{color2}'
+gradient_color_3 = '{color3}'
+gradient_color_4 = '{color4}'
+gradient_color_5 = '{color5}'
+gradient_color_6 = '{color6}'
+
+[smoothing]
+noise_reduction = 80
+waves = 0

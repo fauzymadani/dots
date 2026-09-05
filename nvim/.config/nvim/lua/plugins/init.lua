@@ -8,4 +8,5 @@ return {
 	{ import = 'plugins.diffview' },
 	{ import = 'plugins.indent' },
 	{ import = 'plugins.compile' },
+	{ import = 'plugins.presence' },
 }

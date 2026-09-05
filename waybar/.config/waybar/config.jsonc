@@ -21,20 +21,24 @@
     ],
 
     "hyprland/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "format": "{icon}",
-        "format-icons": {
-            "1": "",  
-            "2": "󰈹",  
-            "3": "󰅩",  
-            "4": "",  
-            "5": "󰓇",  
-            "urgent": "",
-            "default": ""
-        }
-    },
-
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{icon}",
+    "format-icons": {
+        "1": "",      
+        "2": "󰈹",      
+        "3": "󰅩",      
+        "4": "",      
+        "5": "󰓇",      
+        "6": "",      
+        "7": "",      
+        "8": "󰙯",      
+        "9": "",      
+        "10": "󰎆",     
+        "urgent": "",
+        "default": ""
+		}
+	},
     "hyprland/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
@@ -52,10 +56,11 @@
         "show-passive-items": true
     },
     "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "󰥔  {:%H:%M}",
-        "format-alt": "󰃭  {:%Y-%m-%d}"
-    },
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format": "󰥔  {:%H:%M}",
+    "format-alt": "󰃭  {:%Y-%m-%d}",
+    "on-click": "waybar_clock_toggle"
+	},
     "cpu": {
         "format": "  {usage}%",
         "tooltip": false

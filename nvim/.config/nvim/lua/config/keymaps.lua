@@ -3,10 +3,12 @@ vim.g.maplocalleader = ' '
 
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to definition' })
 vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = 'Go to references' })
-vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover documentation' })
+vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ border = 'rounded' }) end, { desc = 'Hover documentation' })
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename' })
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code action' })
-vim.keymap.set('n', '<leader>n', vim.diagnostic.open_float, { desc = 'Show diagnostics' })
+vim.keymap.set('n', '<leader>n', function() vim.diagnostic.open_float({ border = 'rounded' }) end, { desc = 'Show diagnostics' })
+vim.diagnostic.config({ float = { border = 'rounded' } })
+
 
 vim.keymap.set('t', '<esc>', [[<C-\><C-n>]])
 
