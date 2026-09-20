@@ -1,21 +1,18 @@
 return {
 	{
-		'andweeb/presence.nvim',
+		'vyfor/cord.nvim',
+		build = ':Cord update',
 		event = 'VeryLazy',
-		config = function()
-			require('presence').setup({
-				auto_update = true,
-				main_image = 'neovim',
-				show_time = false,
-				buttons = false,
-				enable_line_number = false,
-				editing_text = 'Editing something...',
-				reading_text = 'Reading in Neovim',
-				file_explorer_text = 'Browsing files',
-				workspace_text = 'Working on something...',
-				git_commit_text = 'Committing changes',
-				plugin_manager_text = 'Managing plugins',
-			})
-		end,
+		opts = {
+			display = {
+				theme = 'default',
+			},
+			text = {
+				editing = 'Editing something...',
+				reading = 'Reading in Neovim',
+				viewing = 'Browsing files',
+				workspace = 'Working on something...',
+			},
+		},
 	},
 }

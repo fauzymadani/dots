@@ -54,10 +54,10 @@ hl.on('hyprland.start', function()
 
 	hl.exec_cmd('blueman-applet')
 
-	hl.exec_cmd([[swayidle -w \
-        timeout 600 'hyprlock' \
-        timeout 1200 'hyprctl dispatch dpms off' \
-        resume 'hyprctl dispatch dpms on']])
+	hl.exec_cmd([[swayidle -w -I \
+		timeout 600 'hyprlock' \
+    	timeout 1200 'hyprctl dispatch dpms off' \
+    	resume 'hyprctl dispatch dpms on']])
 
 	hl.exec_cmd('systemctl --user start hyprpolkitagent')
 end)
@@ -339,7 +339,7 @@ hl.bind('XF86AudioPrev', hl.dsp.exec_cmd('playerctl previous'), { locked = true 
 hl.bind(
 	'PRINT',
 	hl.dsp.exec_cmd(
-		[[sh -c 'dir="$HOME/Pictures/Screenshoot/hyprland" && mkdir -p "$dir" && file="$dir/Screenshot_$(date +%Y%m%d_%H%M%S).png" && grim "$file" && wl-copy --type image/png < "$file" && notify-send -i "$file" "Screenshot" "saved to $dir"']]
+		[[sh -c 'dir="$HOME/Pictures/Screenshots/hyprland" && mkdir -p "$dir" && file="$dir/Screenshot_$(date +%Y%m%d_%H%M%S).png" && grim "$file" && wl-copy --type image/png < "$file" && notify-send -i "$file" "Screenshot" "saved to $dir"']]
 	)
 )
 
@@ -347,7 +347,7 @@ hl.bind(
 hl.bind(
 	'ALT + PRINT',
 	hl.dsp.exec_cmd(
-		[[sh -c 'dir="$HOME/Pictures/Screenshoot/hyprland" && mkdir -p "$dir" && file="$dir/Screenshot_$(date +%Y%m%d_%H%M%S).png" && grim -g "$(slurp)" "$file" && wl-copy --type image/png < "$file" && notify-send -i "$file" "Screenshot" "Copied to clipboard and saved to $dir"']]
+		[[sh -c 'dir="$HOME/Pictures/Screenshots/hyprland" && mkdir -p "$dir" && file="$dir/Screenshot_$(date +%Y%m%d_%H%M%S).png" && grim -g "$(slurp)" "$file" && wl-copy --type image/png < "$file" && notify-send -i "$file" "Screenshot" "Copied to clipboard and saved to $dir"']]
 	)
 )
 
@@ -431,4 +431,10 @@ hl.layer_rule({
 	match = { namespace = '^wofi$' },
 	blur = true,
 	ignore_alpha = 0.5,
+})
+
+hl.window_rule({
+	name = 'inhibit-idle-fullscreen',
+	match = { fullscreen = true },
+	idle_inhibit = 'always',
 })
