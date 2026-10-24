@@ -8,6 +8,8 @@ vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename' })
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code action' })
 vim.keymap.set('n', '<leader>n', function() vim.diagnostic.open_float({ border = 'rounded' }) end, { desc = 'Show diagnostics' })
 vim.diagnostic.config({ float = { border = 'rounded' } })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous diagnostic' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
 
 
 vim.keymap.set('t', '<esc>', [[<C-\><C-n>]])

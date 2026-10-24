@@ -9,4 +9,5 @@ return {
 	{ import = 'plugins.indent' },
 	{ import = 'plugins.compile' },
 	{ import = 'plugins.presence' },
+	{ import = 'plugins.productivity' },
 }

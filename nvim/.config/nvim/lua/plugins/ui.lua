@@ -1,5 +1,46 @@
 return {
 	{
+		'folke/todo-comments.nvim',
+		lazy = false,
+		dependencies = { 'nvim-lua/plenary.nvim' },
+		config = function()
+			require('todo-comments').setup()
+		end,
+		keys = {
+			{
+				'<leader>xt',
+				function()
+					require('todo-comments').setup()
+					vim.cmd('Trouble todo toggle')
+				end,
+				desc = 'List TODO comments',
+			},
+		},
+	},
+	{
+		'folke/trouble.nvim',
+		dependencies = { 'MunifTanjim/nui.nvim' },
+		cmd = 'Trouble',
+		opts = {
+			focus = true,
+			follow = true,
+			auto_preview = false,
+			multiline = false,
+		},
+		keys = {
+			{
+				'<leader>xx',
+				'<Cmd>Trouble diagnostics toggle<CR>',
+				desc = 'Toggle diagnostics list',
+			},
+			{
+				'<leader>xX',
+				'<Cmd>Trouble diagnostics toggle filter.buf=0<CR>',
+				desc = 'Toggle buffer diagnostics',
+			},
+		},
+	},
+	{
 		'nvim-tree/nvim-tree.lua',
 		config = function()
 			vim.g.loaded_netrw = 1
