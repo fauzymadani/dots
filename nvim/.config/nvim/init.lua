@@ -17,6 +17,12 @@ if not theme_ok then
 	vim.cmd.colorscheme('rose-pine')
 end
 
+vim.api.nvim_create_autocmd('ColorSchemePre', {
+	callback = function()
+		vim.cmd('highlight clear')
+	end,
+})
+
 vim.api.nvim_create_autocmd('ColorScheme', {
 	callback = function(opts)
 		local f = io.open(vim.fn.stdpath('config') .. '/theme.lua', 'w')

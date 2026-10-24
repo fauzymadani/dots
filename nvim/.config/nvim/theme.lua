@@ -1,1 +1,1 @@
-vim.cmd.colorscheme("luna")
+vim.cmd.colorscheme("moonfly")

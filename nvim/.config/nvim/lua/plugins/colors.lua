@@ -5,6 +5,7 @@ return {
 	{ 'wtfox/luna.nvim' },
 	{ 'shaunsingh/nord.nvim' },
 	{ 'miikanissi/modus-themes.nvim' },
+	{ 'bluz71/vim-moonfly-colors' },
 	{ 'rose-pine/neovim', name = 'rose-pine', priority = 1000 },
 	{ 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
 	{
