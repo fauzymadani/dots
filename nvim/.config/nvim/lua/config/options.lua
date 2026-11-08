@@ -3,9 +3,33 @@ vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.wrap = false
 
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.softtabstop = 4
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+
+-- formatting: python follows PEP 8 (4 spaces); c/c++ stay 2-wide like the rest
+-- of the config. expandtab keeps files portable (no literal tab characters).
+-- these widths must match the clang-format options in lua/plugins/lsp.lua and
+-- the bodies of the snippets in lua/snippets/.
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = { 'python' },
+	callback = function()
+		vim.opt_local.expandtab = true
+		vim.opt_local.tabstop = 4
+		vim.opt_local.shiftwidth = 4
+		vim.opt_local.softtabstop = 4
+	end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = { 'c', 'cpp' },
+	callback = function()
+		vim.opt_local.expandtab = true
+		vim.opt_local.tabstop = 2
+		vim.opt_local.shiftwidth = 2
+		vim.opt_local.softtabstop = 2
+	end,
+})
 
 vim.opt.laststatus = 2
 

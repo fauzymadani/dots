@@ -3,14 +3,35 @@ vim.g.maplocalleader = ' '
 
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to definition' })
 vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = 'Go to references' })
-vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ border = 'rounded' }) end, { desc = 'Hover documentation' })
+vim.keymap.set('n', 'K', function()
+	vim.lsp.buf.hover({ border = 'rounded' })
+end, { desc = 'Hover documentation' })
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename' })
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code action' })
-vim.keymap.set('n', '<leader>n', function() vim.diagnostic.open_float({ border = 'rounded' }) end, { desc = 'Show diagnostics' })
+-- Same picker but for a visual selection (useful for whole-block refactors).
+vim.keymap.set('v', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code action (selection)' })
+-- "Fix available" shortcut: applies the quick fix under the cursor straight
+-- away when the server offers exactly one; otherwise shows the picker.
+vim.keymap.set('n', '<leader>cf', function()
+	vim.lsp.buf.code_action({
+		apply = true,
+		filter = function(action)
+			-- keep quick fixes (and actions that do not declare a kind)
+			return action.kind == nil or vim.startswith(action.kind, 'quickfix')
+		end,
+	})
+end, { desc = 'Fix: apply quick fix under cursor' })
+vim.keymap.set('n', '<leader>n', function()
+	vim.diagnostic.open_float({ border = 'rounded' })
+end, { desc = 'Show diagnostics' })
 vim.diagnostic.config({ float = { border = 'rounded' } })
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous diagnostic' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
+vim.keymap.set('n', '[d', function()
+	vim.diagnostic.jump({ count = -1, float = true })
+end, { desc = 'Previous diagnostic' })
 
+vim.keymap.set('n', ']d', function()
+	vim.diagnostic.jump({ count = 1, float = true })
+end, { desc = 'Next diagnostic' })
 
 vim.keymap.set('t', '<esc>', [[<C-\><C-n>]])
 

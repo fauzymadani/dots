@@ -16,6 +16,9 @@ return {
 				input_word_completion = true,
 				default_command = {
 					go = 'go test ./...',
+					python = 'python3 %',
+					c = 'cc -std=c17 -Wall -Wextra -o %:r % && ./%:r',
+					cpp = 'g++ -std=c++17 -Wall -Wextra -o %:r % && ./%:r',
 				},
 			}
 		end,

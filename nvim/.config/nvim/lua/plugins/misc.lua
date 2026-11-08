@@ -4,8 +4,8 @@ return {
 		version = '*',
 		lazy = true,
 		event = {
-			"BufReadPre " .. vim.fn.expand "~" .. "/Documents/Obsidian Vault/**.md",
-			"BufNewFile " .. vim.fn.expand "~" .. "/Documents/Obsidian Vault/**.md",
+			'BufReadPre ' .. vim.fn.expand('~') .. '/Documents/Obsidian Vault/**.md',
+			'BufNewFile ' .. vim.fn.expand('~') .. '/Documents/Obsidian Vault/**.md',
 		},
 		dependencies = {
 			'nvim-lua/plenary.nvim',
@@ -24,7 +24,17 @@ return {
 		build = ':TSUpdate',
 		config = function()
 			require('nvim-treesitter').setup({})
-			require('nvim-treesitter').install({ 'markdown', 'markdown_inline', 'lua', 'vim', 'vimdoc', 'latex' })
+			require('nvim-treesitter').install({
+				'markdown',
+				'markdown_inline',
+				'lua',
+				'vim',
+				'vimdoc',
+				'latex',
+				'python',
+				'c',
+				'cpp',
+			})
 		end,
 	},
 	{
