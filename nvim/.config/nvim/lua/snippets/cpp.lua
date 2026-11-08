@@ -190,4 +190,234 @@ return {
 		t({ '', '  }', '};' }),
 		i(0),
 	}),
+
+	s('elif', {
+		t({ 'else if (' }),
+		i(1, 'condition'),
+		t({ ') {', '  ' }),
+		i(2, '// ...'),
+		t({ '', '}' }),
+		i(0),
+	}),
+
+	s('trycatch', {
+		t({ 'try {', '  ' }),
+		i(1, '// ...'),
+		t({
+			'',
+			'} catch (const std::exception& e) {',
+			'  std::cerr << e.what() << std::endl;',
+			'}',
+		}),
+		i(0),
+	}),
+
+	s('ns', {
+		t({ 'namespace ' }),
+		i(1, 'name'),
+		t({ ' {', '  ' }),
+		i(2, '// ...'),
+		t({ '', '}  // namespace ' }),
+		i(3, 'name'),
+		i(0),
+	}),
+
+	s('enumc', {
+		t({ 'enum class ' }),
+		i(1, 'Name'),
+		t({ ' {', '  ' }),
+		i(2, 'First'),
+		t({ ',', '  ' }),
+		i(3, 'Second'),
+		t({ ',', '};' }),
+		i(0),
+	}),
+
+	s('hguard', {
+		t({ '#ifndef ' }),
+		i(1, 'HEADER_H'),
+		t({ '', '#define ' }),
+		i(2, 'HEADER_H'),
+		t({ '', '', '' }),
+		i(3, '// ...'),
+		t({ '', '', '#endif  // ' }),
+		i(4, 'HEADER_H'),
+		i(0),
+	}),
+
+	s('cppinc', {
+		t({ '#include <' }),
+		i(1, 'iostream'),
+		t({ '>' }),
+		i(0),
+	}),
+
+	s('mainargs', {
+		t({ 'int main(int argc, char** argv) {', '  ' }),
+		i(1, '// ...'),
+		t({ '', '  return 0;', '}' }),
+		i(0),
+	}),
+
+	s('foreachmut', {
+		t({ 'for (auto& ' }),
+		i(1, 'item'),
+		t({ ' : ' }),
+		i(2, 'container'),
+		t({ ') {', '  ' }),
+		i(3, '// ...'),
+		t({ '', '}' }),
+		i(0),
+	}),
+
+	s('tmpl', {
+		t({ 'template <typename T>', '' }),
+		i(1, 'T'),
+		t({ ' ' }),
+		i(2, 'function_name'),
+		t({ '(' }),
+		i(3, 'const T& value'),
+		t({ ') {', '  ' }),
+		i(4, '// ...'),
+		t({ '', '}' }),
+		i(0),
+	}),
+
+	s('lambda', {
+		t({ '[' }),
+		i(1, '&'),
+		t({ '](' }),
+		i(2, 'params'),
+		t({ ') {', '  ' }),
+		i(3, '// ...'),
+		t({ '', '}' }),
+		i(0),
+	}),
+
+	s('using', {
+		t({ 'using ' }),
+		i(1, 'Name'),
+		t({ ' = ' }),
+		i(2, 'Type'),
+		t({ ';' }),
+		i(0),
+	}),
+
+	s('cpperr', {
+		t({ 'std::cerr << ' }),
+		i(1, '"error: " << message'),
+		t({ ' << std::endl;' }),
+		i(0),
+	}),
+
+	s('cppfiles', {
+		t({
+			'std::ifstream in("input.txt");',
+			'if (!in) {',
+			'  std::cerr << "cannot open input.txt" << std::endl;',
+			'  return 1;',
+			'}',
+			'',
+			'std::string line;',
+			'while (std::getline(in, line)) {',
+			'  ',
+		}),
+		i(1, '// ...'),
+		t({ '', '}', '', 'std::ofstream out("output.txt");', 'out << ' }),
+		i(2, 'value'),
+		t({ ' << std::endl;' }),
+		i(0),
+	}),
+
+	s('cppmap', {
+		t({ 'std::map<' }),
+		i(1, 'std::string, int'),
+		t({ '> ' }),
+		i(2, 'counts'),
+		t({ ';', '' }),
+		i(3, 'counts["key"] = 1;'),
+		t({ '', '', 'for (const auto& [key, value] : ' }),
+		i(4, 'counts'),
+		t({ ') {', '  ' }),
+		i(5, '// ...'),
+		t({ '', '}' }),
+		i(0),
+	}),
+
+	s('cppset', {
+		t({ 'std::set<' }),
+		i(1, 'int'),
+		t({ '> ' }),
+		i(2, 'values'),
+		t({ ';', '' }),
+		i(3, 'values.insert(x);'),
+		t({ '', '', 'if (values.count(' }),
+		i(4, 'x'),
+		t({ ') != 0) {', '  ' }),
+		i(5, '// ...'),
+		t({ '', '}' }),
+		i(0),
+	}),
+
+	s('cppidx', {
+		t({ 'for (std::size_t i = 0; i < ' }),
+		i(1, 'data.size()'),
+		t({ '; ++i) {', '  ' }),
+		i(2, '// ...'),
+		t({ '', '}' }),
+		i(0),
+	}),
+
+	s('cppsortcmp', {
+		t({ 'std::sort(' }),
+		i(1, 'data.begin(), data.end()'),
+		t({ ', [](const auto& a, const auto& b) {', '  return ' }),
+		i(2, 'a < b'),
+		t({ ';', '});' }),
+		i(0),
+	}),
+
+	s('cppunique', {
+		t({ 'auto ' }),
+		i(1, 'ptr'),
+		t({ ' = std::make_unique<' }),
+		i(2, 'Type'),
+		t({ '>(' }),
+		i(3, 'args'),
+		t({ ');' }),
+		i(0),
+	}),
+
+	s('cppshared', {
+		t({ 'auto ' }),
+		i(1, 'ptr'),
+		t({ ' = std::make_shared<' }),
+		i(2, 'Type'),
+		t({ '>(' }),
+		i(3, 'args'),
+		t({ ');' }),
+		i(0),
+	}),
+
+	s('cppalgos', {
+		t({
+			'std::sort(v.begin(), v.end());                      // ascending',
+			'std::reverse(v.begin(), v.end());                   // in place',
+			'auto it = std::find(v.begin(), v.end(), x);         // iterator or end()',
+			'auto n = std::count(v.begin(), v.end(), x);         // occurrences',
+			'auto sum = std::accumulate(v.begin(), v.end(), 0);  // <numeric>',
+			'auto hi = std::max_element(v.begin(), v.end());     // iterator',
+			'auto lo = std::min_element(v.begin(), v.end());     // iterator',
+		}),
+		i(0),
+	}),
+
+	s('cppcast', {
+		t({
+			'auto i = static_cast<int>(value);               // explicit numeric conversion',
+			'auto d = dynamic_cast<Derived*>(base_ptr);      // polymorphic downcast',
+			'auto p = const_cast<char*>(str.c_str());        // drop const',
+		}),
+		i(0),
+	}),
 }
