@@ -102,6 +102,18 @@ return {
 				},
 			}
 
+			-- Macros clangd should assume as defined for single files / projects
+			-- that ship no compile flags (compile_commands.json, compile_flags.txt
+			-- or .clangd). Everything inside a matching `#ifdef` is otherwise an
+			-- *inactive preprocessor region*: clangd does not parse it at all, so
+			-- there is no completion, hover, diagnostics or syntax there.
+			-- Rename/extend this list to match the macros you actually use.
+			local clangd_defines = { 'LOCAL', 'DEBUG', 'ONPC' }
+			local clangd_fallback_flags = {}
+			for _, macro in ipairs(clangd_defines) do
+				clangd_fallback_flags[#clangd_fallback_flags + 1] = '-D' .. macro
+			end
+
 			-- c / c++
 			vim.lsp.config.clangd = {
 				cmd = {
@@ -111,6 +123,9 @@ return {
 					'--header-insertion=never',
 					'--enable-config',
 					'--query-driver=/usr/bin/g++,/usr/bin/c++,/usr/bin/gcc*,/usr/bin/clang*',
+				},
+				init_options = {
+					fallbackFlags = clangd_fallback_flags,
 				},
 				filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
 				root_markers = {

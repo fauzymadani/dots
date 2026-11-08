@@ -35,6 +35,38 @@ end, { desc = 'Next diagnostic' })
 
 vim.keymap.set('t', '<esc>', [[<C-\><C-n>]])
 
+-- Apply config edits without quitting Neovim (logic in lua/config/reload.lua).
+-- <leader>rr: full restart; buffers, window layout and cwd are restored
+--             (:restart, Nvim 0.12). Save your files first (:wa).
+vim.keymap.set('n', '<leader>rr', '<Cmd>restart<CR>', { desc = 'Restart Nvim (reload full config)' })
+-- <leader>rl: re-run config/options.lua + config/keymaps.lua in place.
+--             NOTE: removing a mapping from the file still needs a restart.
+vim.keymap.set('n', '<leader>rl', function()
+	require('config.reload').apply('style')
+end, { desc = 'Reload options + keymaps' })
+-- <leader>ra: apply everything (options, keymaps, plugin specs, LSP servers).
+vim.keymap.set('n', '<leader>ra', function()
+	require('config.reload').apply('all')
+end, { desc = 'Apply all config changes' })
+-- <leader>rs: re-run lua/plugins/lsp.lua, then restart the attached servers.
+vim.keymap.set('n', '<leader>rs', function()
+	require('config.reload').apply('lsp')
+end, { desc = 'Reload LSP config + restart servers' })
+
+-- Same thing as a command, so it can also be pushed into a *different*
+-- running session over RPC:
+--   nvim --server <address> --remote-expr \
+--     'luaeval("require(\"config.reload\").apply(\"all\")")'
+vim.api.nvim_create_user_command('ConfigReload', function(opts)
+	require('config.reload').apply(opts.args ~= '' and opts.args or 'all')
+end, {
+	nargs = '?',
+	desc = 'Apply config changes to the running session (all|style|lsp)',
+	complete = function()
+		return { 'all', 'style', 'lsp' }
+	end,
+})
+
 -- Resize the current split without repeating <C-w>.
 vim.keymap.set('n', '<A-k>', '<Cmd>resize +2<CR>', { desc = 'Increase split height' })
 vim.keymap.set('n', '<A-j>', '<Cmd>resize -2<CR>', { desc = 'Decrease split height' })
